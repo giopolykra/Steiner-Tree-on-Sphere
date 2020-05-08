@@ -338,6 +338,9 @@ def steinerTree(nodes):
         ax.set_zlim([-1,1])
 #        ax.set_aspect("equal")
         pl.tight_layout()
+        manager = plt.get_current_fig_manager()
+        manager.window.showMaximized()
+        plt.savefig('Steiner_tree.png')
         pl.show()
 
 #NOTE: the more points, the lower the likelihood of working well
