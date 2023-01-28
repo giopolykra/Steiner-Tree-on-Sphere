@@ -15,6 +15,6 @@ The function Arc3D(p0, p1) plots an arc in the unit sphere that connects the poi
 - [x] Constrict the lines on the surface of the sphere
 - [ ] Add more vertices
 - [ ] Try to avoid local minima and select stratigical initial conditions
-- [ ] Maybe let the user select the number of points and whereto be placed
+- [ ] Maybe let the user select the number of points and where to be placed
 - [ ] Map method to Google earth
 
