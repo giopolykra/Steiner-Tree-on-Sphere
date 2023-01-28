@@ -9,7 +9,7 @@ Run python run_steiner.py
 
 <img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Screenshot%20from%202023-01-28%2019-55-14.png" width="2500">
 
-The function Arc3D(p0, p1) plots an arc in the unit sphere that connects the points p0 and p1
+Novelty: the function Arc3D(p0, p1) plots an arc in the unit sphere that connects the points p0 and p1
 
 # To do:
 - [x] Constrict the lines on the surface of the sphere
