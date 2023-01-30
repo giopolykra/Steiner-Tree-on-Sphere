@@ -13,38 +13,46 @@ def main():
     ax = fig.add_subplot(111, projection='3d')
 
     """Creating the sphere"""
-    u = np.linspace(0, 2 * np.pi, 100)
-    v = np.linspace(0, np.pi, 100)
+    theta = np.linspace(0, np.pi, 100)
+    phi = np.linspace(0, 2 * np.pi, 100)
 
-    x, y, z = sph_to_cartes_range(u, v)
+    x, y, z = sph_to_cartes_range(phi, theta)
     """Plotting the sphere"""
     ax.plot_surface(x, y, z, alpha=0.3, color='b')
 
     """ Initialize random points - The Vertices of the Network """
     nodes = random_nodes()
+    print(nodes)
     R = len(nodes[0])
     n = len(nodes)
     init_coords = ([random.uniform(min([i[dim] for i in nodes]), max([i[dim] for i in nodes])) for dim in range(R)])
 
     """Plotting the initial guess point"""
     Init_D = steiner_distance(init_coords, nodes)
-    u_i,v_i = init_coords
-    x_i_point, y_i_point, z_i_point = sph_to_cartes(u_i,v_i)
+    theta_i, phi_i = init_coords
+    x_i_point, y_i_point, z_i_point = sph_to_cartes(theta_i, phi_i)
     ax.scatter(x_i_point, y_i_point, z_i_point, color='blue', label = 'Initial Distance: {:2.2f}'.format(Init_D))
 
     """ Find the minimum of distance """
-    bnds = ((0., np.pi), (0, 2*np.pi))
-    optim = minimize(steiner_distance, init_coords, args=(nodes), method='SLSQP',bounds=bnds,options={'maxiter':300})
-    steiner_coord = optim.x
-    steiner_dist = optim.fun
-    u_s,v_s = steiner_coord
-    x_s_point, y_s_point, z_s_point = sph_to_cartes(u_s,v_s)
+    bnds1 = ((0., np.pi), (0, 2*np.pi))
+    optim1 = minimize(steiner_distance, init_coords, args=(nodes), method='SLSQP',bounds=bnds1,options={'maxiter':1000})
+    steiner_coord1 = optim1.x
+    steiner_dist1 = optim1.fun
+    theta_s1, phi_s1 = steiner_coord1
+    x_s_point1, y_s_point1, z_s_point1 = sph_to_cartes(theta_s1, phi_s1)
+    ax.scatter(x_s_point1, y_s_point1, z_s_point1, marker='x',  color='r', label = 'Steiner Distance: {:2.2f}'.format(steiner_dist1))
 
+    # bnds2 = ((0., np.pi), (0, 2*np.pi))
+    # optim2 = minimize(steiner_distance, init_coords, args=(nodes), method='Nelder-Mead',bounds=bnds2,options={'maxiter':1000})
+    # steiner_coord2 = optim2.x
+    # steiner_dist2 = optim2.fun
+    # u_s2, v_s2 = steiner_coord2
+    # x_s_point2, y_s_point2, z_s_point2 = sph_to_cartes(u_s2, v_s2)
+    # ax.scatter(x_s_point2, y_s_point2, z_s_point2, color='green', label = 'Steiner Distance: {:2.2f}'.format(steiner_dist2))
     """Plotting the Steiner point"""
-    ax.scatter(x_s_point, y_s_point, z_s_point, color='r', label = 'Steiner Distance: {:2.2f}'.format(steiner_dist))
 
-    for u,v in nodes:
-        x_point, y_point, z_point = sph_to_cartes(u,v)
+    for theta, phi in nodes:
+        x_point, y_point, z_point = sph_to_cartes(theta, phi)
 
         # Plotting the nodes
         ax.scatter(x_point, y_point, z_point, color='yellow')
@@ -53,9 +61,11 @@ def main():
         x,y,z = Arc3D((x_point, y_point, z_point), (x_i_point, y_i_point, z_i_point))
         ax.plot(x, y, z, color = 'blue')
         # Connect each yellow point with the Steiner Point      
-        x,y,z = Arc3D((x_point, y_point, z_point), (x_s_point, y_s_point, z_s_point))
+        x,y,z = Arc3D((x_point, y_point, z_point), (x_s_point1, y_s_point1, z_s_point1))
         ax.plot(x, y, z, color = 'red')
 
+        # x,y,z = Arc3D((x_point, y_point, z_point), (x_s_point2, y_s_point2, z_s_point2))
+        # ax.plot(x, y, z, color = 'green')
     # Setting the axis labels
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
@@ -72,8 +82,9 @@ def random_nodes():
     return(coords)
 
 def dist_sphere_azim(a, b):
+    # 
     # a = (r,phi,theta) where theta==lambda longitude
-    Ds = acos(sin(a[0])*sin(b[0])+cos(a[0])*cos(b[0])*cos(b[1]-a[1]))
+    Ds = acos(sin(np.pi/2-a[0])*sin(np.pi/2-b[0])+cos(np.pi/2-a[0])*cos(np.pi/2-b[0])*cos(b[1]-a[1]))
     return (Ds)
 
 def steiner_distance(steiner_coords, nodes):
@@ -96,16 +107,16 @@ def Arc3D(p0, p1):#
     z = [res[i][2] for i in range(num_points)]
     return x,y,z
 
-def sph_to_cartes_range(u,v):
-    x = np.outer(np.cos(u), np.sin(v))
-    y = np.outer(np.sin(u), np.sin(v))
-    z = np.outer(np.ones(np.size(u)), np.cos(v))
+def sph_to_cartes_range(theta,phi):
+    x = np.outer(np.cos(phi), np.sin(theta))
+    y = np.outer(np.sin(phi), np.sin(theta))
+    z = np.outer(np.ones(np.size(phi)), np.cos(theta))
     return x, y, z
 
-def sph_to_cartes(u,v):
-    x = np.cos(u) * np.sin(v)
-    y = np.sin(u) * np.sin(v)
-    z = np.cos(v)
+def sph_to_cartes(theta,phi):
+    x = np.cos(phi) * np.sin(theta)
+    y = np.sin(phi) * np.sin(theta)
+    z = np.cos(theta)
     return x, y, z
 
 if __name__ == "__main__":
