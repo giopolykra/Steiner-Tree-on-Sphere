@@ -2,13 +2,14 @@
 <!-- Returns the Steiner tree on the surface of a sphere. Based on code by Samuel-Retter
 
 <img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Steiner_tree.png" width="1500">
-<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/steiner_tree2.png" width="1500">
 
 # Update: -->
 
 Run python run_steiner.py
 
-<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Screenshot%20from%202023-01-28%2019-55-14.png" width="2500">
+<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Screenshot%20from%202023-01-28%2019-55-14.png" width="1500">
+
+<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/steiner_tree2.png" width="1500">
 
 Novelty: the function Arc3D(p0, p1) plots an arc in the unit sphere that connects the points p0 and p1
 
