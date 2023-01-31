@@ -6,11 +6,10 @@
 # Update: -->
 
 Run python run_steiner.py
-
-<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Screenshot%20from%202023-01-28%2019-55-14.png" width="500">
-
-<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/steiner_tree2.png" width="500">
-
+<p float="left">
+  <img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Screenshot%20from%202023-01-28%2019-55-14.png" width="500">
+  <img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/steiner_tree2.png" width="500">
+</p>
 Novelty: the function Arc3D(p0, p1) plots an arc in the unit sphere that connects the points p0 and p1
 
 inspired by the answer: https://math.stackexchange.com/questions/329749/draw-an-arc-in-3d-coordinate-system
