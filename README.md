@@ -1,7 +1,8 @@
 # Steiner-Tree-on-Sphere
 <!-- Returns the Steiner tree on the surface of a sphere. Based on code by Samuel-Retter
 
-<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Steiner_tree.png" width="2500">
+<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/Steiner_tree.png" width="1500">
+<img src="https://github.com/giopolykra/Steiner-Tree-on-Sphere/blob/master/steiner_tree2.png" width="1500">
 
 # Update: -->
 
